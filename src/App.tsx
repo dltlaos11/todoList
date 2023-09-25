@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Todos from './components/Todos';
+import TodosContainer from './containers/TodosContainer';
 
-function App() {
+
+  // 상위 컴포넌트의 상태 데이터를 컴포넌트 속성(props)을 통해 하위 컴포넌트에 전달
+  // 애플리케이션 전반에서 사용되는 ts인터페이스이므로 최상단 컴포넌트에 정의
+  export interface Todo {
+    id: number;
+    text: string;
+    done: boolean;
+  }
+
+const App = () => {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {
+    /*
+    TDD
+    <h1>To-do</h1> 
+    <ul>
+      <li>
+        아무 일도 하기 싫다
+      </li>
+    </ul> */
+    }
+    {/* <Todos /> */}
+    <TodosContainer />
+    </>
   );
 }
 
