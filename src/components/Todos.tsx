@@ -2,18 +2,26 @@ import TodoFooter from "./TodoFooter";
 import TodoHeader from "./TodoHeader";
 import TodoInput from "./TodoInput";
 import TodoList from "./TodoList";
+import TodoFilter from "./TodoFilter";
 
 import { useState, useRef, useCallback } from 'react'
 import { Todo } from "../App";
 
 interface Props {
     readonly input: string;
-    readonly todos: Todo[];
+    // readonly todos: Todo[];
+    readonly todos?: Todo[]; // 배열이 아닌 값이 전달 될 수 있으므로 필수 속성 -> 선택 속성 변경
+
+    // filter 데이터 타입 추가
+    readonly filter: string;
     readonly onRemove: (id: number) => void;
     readonly onToggle: (id: number) => void;
     readonly onClearAll: () => void;
     readonly onInsert: (input: string) => void;
     readonly onChangeInput: (input: string) => void;
+    // onChangeFilter 함수 타입 추가
+    readonly onChangeFilter: (filter: string) => void;
+    readonly onEdit: (id: number, input: string) => void;
 }
 
 const Todos = ({
@@ -23,7 +31,10 @@ const Todos = ({
     onInsert,
     onToggle,
     onRemove,
-    onClearAll
+    onClearAll,
+    filter,
+    onChangeFilter,
+    onEdit
 }: Props) => {
 // TodosContainer 컴포넌트로부터 리덕스 스토어 상태와 스토어 상태 변경 함수를 props로 전달받음
 
@@ -121,7 +132,8 @@ const Todos = ({
     <div>
         <TodoHeader />
         <TodoInput input={input} onInsert={onInsert} onChangeInput={onChangeInput}></TodoInput>
-        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
+        <TodoFilter filter={filter} onChangeFilter={onChangeFilter} />
+        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} onEdit={onEdit}/>
         <TodoFooter onClearAll={onClearAll}/>
     </div>
   )
