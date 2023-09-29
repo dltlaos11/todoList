@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import styles from '../Todo.module.css';
 // ts 인터페이스 임포트
 import { Todo } from "../App"
@@ -26,11 +26,13 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
         editingId: state.editingId,
     }))
 
-    // /* 
+    // 편집 입력 요소 표시여부
     const [showInput, setShowInput] = useState(false);
-    // */
+    
+    // 편집 입력값 상태
     const [inputText, setInputText] = useState("");
 
+    // createRef 함수를 통해서 ref를 설정하여 돔 요소에 접근
     const editInput: React.RefObject<HTMLInputElement> = React.createRef();
 
     // 스토어 dispatch 사용 가능
@@ -74,6 +76,7 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
         }
     }
 
+    // 입력 요소 포커스가 사라지면 편집 입력 요소를 숨김
     const handleBlur = () => {
         console.log("handleBlut inputText: "+ inputText);
 
@@ -84,6 +87,7 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
         // */
     }
 
+    // 마운트
     useEffect(() => {
         console.log("useEffect todo = " + todo);
 
@@ -94,6 +98,7 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
         }
     }, [todo])
 
+    // Ref를 설정해 준 DOM에 접근하려면 속서 current를 조회. 마운트 될 때  편집 입력 요소가 유효하면 포커스
     useEffect(() => {
         if (editInput.current) {
             editInput.current.focus();
@@ -103,6 +108,7 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
   return (
     <div className={styles.item}>
         <input type='checkbox' checked={done} onChange={() => onToggle(id)}/>
+        {/* 편집 상태일 떄 ref 사용한 입력 요소 표시 */}
         {showInput && (
             <input 
                 value={inputText}
@@ -112,6 +118,7 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
                 ref={editInput}
             />
         )}
+        {/* 편집 상태가 아닐 떄 span 요소 표시 */}
         {!showInput && <span onDoubleClick={onDoubleClick}>{text}</span>}
         {/* 
         Todo 항목 텍스트 표시 
