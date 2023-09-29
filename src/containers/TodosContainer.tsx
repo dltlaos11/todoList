@@ -5,11 +5,6 @@
 
 import React, { useCallback } from "react";
 
-// connect 함수 import
-/* 
-import { connect } from "react-redux";
-*/
-
 // 액션 생성 함수 임포트
 import {
     changeTodoInput,
@@ -19,27 +14,21 @@ import {
     clearAllTodos,
     changeFilter, // 필터링 유형 변경 액션 생성 함수를 불러옴
     editTodo
-} from "../modules/todos"
+} from "../actions/todos"
 
 
 // Todos 컴포넌트 임포트
 import Todos from "../components/Todos"
 
 // 상태 인터페이스 임포트
-import { TodoState } from "../modules/todos";
-
-// Dispatch 함수 타입 입포트
-/*
-import { Dispatch, bindActionCreators } from 'redux'
-import { Todo } from "../App";
-*/
+import { TodoState } from "../reducers/todos";
 
 import { useSelector, useDispatch } from "react-redux";
 /* 
 import { Todo } from "../App";
 */
 // getFilteredTodos 선택자 함수 임포트
-import { getFilteredTodos } from "../modules/selector";
+import { getFilteredTodos } from "../selectors/todos";
 
 // 스토어 상태와 스토어 상태 변경 함수에 대한 타입스크립트 타입을 정의
 /*

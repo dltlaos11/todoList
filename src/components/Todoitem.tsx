@@ -4,8 +4,8 @@ import styles from '../Todo.module.css';
 import { Todo } from "../App"
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditingId, resetEditingId } from '../modules/todos'; // 액션 생성 함수 
-import { TodoState } from '../modules/todos'; // 상태 인터페이스 
+import { setEditingId, resetEditingId } from '../actions/todos'; // 액션 생성 함수 
+import { TodoState } from '../reducers/todos'; // 상태 인터페이스 
 
 // props 인터페이스 정의
 interface Props {

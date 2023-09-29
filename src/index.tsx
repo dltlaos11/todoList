@@ -4,15 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
-import todos from "./modules/todos";
-import { composeWithDevTools } from 'redux-devtools-extension';
+import todos from "./reducers/todos";
 
-import { restore } from './modules/todos'; // 상태 복원 액션 생성 함수
+import { restore } from './actions/todos'; // 액션 생성 함수 불러오기
+import configureStore from './store'; // 스토어 생성 함수를 불러옴
 
 // 리듀서를 전달받아 스토어를 생성. composeWithDevTools 함수는 Redux DevTools의 기능을 사용 가능
-const store = createStore(todos, composeWithDevTools());
+// const store = createStore(todos, composeWithDevTools());
+
+const store = configureStore(todos); // 스토어 생성
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

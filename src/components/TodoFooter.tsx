@@ -5,7 +5,7 @@ import styles from '../Todo.module.css';
 import { useStore } from 'react-redux';
 
 // 상태 인터페이스
-import { TodoState } from '../modules/todos';
+import { TodoState } from '../reducers/todos';
 
 
 interface Props {
