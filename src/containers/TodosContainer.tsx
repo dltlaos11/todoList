@@ -30,6 +30,8 @@ import { Todo } from "../App";
 // getFilteredTodos 선택자 함수 임포트
 import { getFilteredTodos } from "../selectors/todos";
 
+import styled from "styled-components";
+
 // 스토어 상태와 스토어 상태 변경 함수에 대한 타입스크립트 타입을 정의
 /*
 type PropsState = ReturnType<typeof mapStateToProps>;
@@ -77,6 +79,25 @@ const TodosContainer = ({
     )
 }
 */
+
+const TodoTemplateBlock = styled.div`
+    width: 512px;
+    height: 768px;
+
+    position: relative; 
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+
+    margin: 0 auto;
+
+    margin-top: 96px;
+    margin-bottom: 32px;
+    display: flex; 
+    flex-direction: column;
+`
+
+
 const TodosContainer = () => {
     /* 
     // 스토어 상태 조회
@@ -133,19 +154,21 @@ const TodosContainer = () => {
     */
 
     return (
-        <Todos 
-            input={input}
-            // todos={todos}
-            todos={filteredTodos}
-            onChangeInput={onChangeInput}
-            onInsert={onInsert}
-            onToggle={onToggle}
-            onRemove={onRemove}
-            onClearAll={onClearAll}
-            filter={filter}
-            onChangeFilter={onChangeFilter}
-            onEdit={onEdit}
-        />
+        <TodoTemplateBlock>
+            <Todos 
+                input={input}
+                // todos={todos}
+                todos={filteredTodos}
+                onChangeInput={onChangeInput}
+                onInsert={onInsert}
+                onToggle={onToggle}
+                onRemove={onRemove}
+                onClearAll={onClearAll}
+                filter={filter}
+                onChangeFilter={onChangeFilter}
+                onEdit={onEdit}
+            />
+        </TodoTemplateBlock>
     );
 };
 

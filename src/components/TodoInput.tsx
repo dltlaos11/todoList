@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 import React from 'react'
-import styles from '../Todo.module.css';
+import styles from '../Todo.module.scss';
 
 interface Props {
     // readonly onInsert: (value: string) => void;

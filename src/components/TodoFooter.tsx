@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import React from 'react'
-import styles from '../Todo.module.css';
+import styles from '../Todo.module.scss';
 
 import { useStore } from 'react-redux';
 

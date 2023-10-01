@@ -7,6 +7,7 @@ import TodoFilter from "./TodoFilter";
 import { useState, useRef, useCallback } from 'react'
 import { Todo } from "../App";
 
+
 interface Props {
     readonly input: string;
     // readonly todos: Todo[];
@@ -23,6 +24,7 @@ interface Props {
     readonly onChangeFilter: (filter: string) => void;
     readonly onEdit: (id: number, input: string) => void;
 }
+
 
 const Todos = ({
     input,
