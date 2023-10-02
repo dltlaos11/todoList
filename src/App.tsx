@@ -16,17 +16,6 @@ const App = () => {
 
   return (
     <>
-    {
-    /*
-    TDD
-    <h1>To-do</h1> 
-    <ul>
-      <li>
-        아무 일도 하기 싫다
-      </li>
-    </ul> */
-    }
-    {/* <Todos /> */}
     <TodosContainer />
     </>
   );
