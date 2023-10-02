@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import React from 'react'
-import styles from '../Todo.module.css';
+import styles from '../Todo.module.scss';
 
 import { useStore } from 'react-redux';
 
 // 상태 인터페이스
-import { TodoState } from '../modules/todos';
+import { TodoState } from '../reducers/todos';
 
 
 interface Props {

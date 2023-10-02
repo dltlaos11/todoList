@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "../Todo.module.css"
+import styles from "../Todo.module.scss"
 
 // props ts 인터페이스 정의
 interface Props {

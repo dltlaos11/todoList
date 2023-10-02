@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
-import styles from '../Todo.module.css';
+import styles from '../Todo.module.scss';
 // ts 인터페이스 임포트
 import { Todo } from "../App"
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setEditingId, resetEditingId } from '../modules/todos'; // 액션 생성 함수 
-import { TodoState } from '../modules/todos'; // 상태 인터페이스 
+import { setEditingId, resetEditingId } from '../actions/todos'; // 액션 생성 함수 
+import { TodoState } from '../reducers/todos'; // 상태 인터페이스 
+
+import { MdDone, MdDelete } from 'react-icons/md';
+import styled, { css } from 'styled-components';
 
 // props 인터페이스 정의
 interface Props {
@@ -15,6 +18,78 @@ interface Props {
     readonly onToggle: (id: number) => void;
     readonly onEdit: (id:number, input: string) => void;
 }
+
+interface CheckCircleProps{
+    readonly done: boolean;
+    readonly onClick: () => void;
+}
+
+interface TextProps{
+    readonly done: boolean;
+}
+
+const Remove = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dee2e6;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0;
+  &:hover {
+    color: #ff6b6b;
+  }
+`;
+
+const TodoItemBlock = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  &:hover {
+    ${Remove} {
+      opacity: 1;
+    }
+  }
+`;
+
+const CheckCircle = styled.div<CheckCircleProps>`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid #ced4da;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  cursor: pointer;
+  ${props =>
+    props.done &&
+    css`
+      border: 1px solid #38d9a9;
+      color: #38d9a9;
+    `}
+`;
+
+const Text = styled.div<TextProps>`
+  flex: 1;
+  font-size: 21px;
+  color: #495057;
+  ${props =>
+    props.done &&
+    css`
+      color: #ced4da;
+    `}
+`;
+
+const TextInput = styled.input`
+  flex: 1;
+  font-size: 21px;
+  color: #495057;
+`;
+
+
 
 const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
 
@@ -106,27 +181,34 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
     }, [editInput])
 
   return (
+
     <div className={styles.item}>
-        <input type='checkbox' checked={done} onChange={() => onToggle(id)}/>
-        {/* 편집 상태일 떄 ref 사용한 입력 요소 표시 */}
-        {showInput && (
-            <input 
-                value={inputText}
-                onChange={onChange}
-                onKeyPress={handleKeyPress}
-                onBlur={handleBlur}
-                ref={editInput}
-            />
-        )}
-        {/* 편집 상태가 아닐 떄 span 요소 표시 */}
-        {!showInput && <span onDoubleClick={onDoubleClick}>{text}</span>}
-        {/* 
-        Todo 항목 텍스트 표시 
-        <span>{todo.text}</span>
-        */}
-        <button onClick={() => onRemove(id)}>삭제</button>
+        {/* <input type='checkbox' checked={done} onChange={() => onToggle(id)}/> */}
+        <TodoItemBlock>
+            <CheckCircle done={done} onClick={() => onToggle(id)}>
+                { done && <MdDone />}
+            </CheckCircle>
+            {/* 편집 상태일 떄 ref 사용한 입력 요소 표시 */}
+            {showInput && (
+                <TextInput 
+                    value={inputText}
+                    onChange={onChange}
+                    onKeyPress={handleKeyPress}
+                    onBlur={handleBlur}
+                    ref={editInput}
+                />
+            )}
+            {/* 편집 상태가 아닐 떄 span 요소 표시 */}
+            {!showInput && <Text done={done} onDoubleClick={onDoubleClick}>{text}</Text>}
+
+            <Remove onClick={()=>onRemove(id)}>
+                <MdDelete />
+            </Remove>
+            {/* <button onClick={() => onRemove(id)}>삭제</button> */}
+        </TodoItemBlock>
+
     </div>
   )
 }
 
-export default Todoitem
+export default React.memo(Todoitem)
