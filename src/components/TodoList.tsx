@@ -20,7 +20,7 @@ const TodoListBlock = styled.div`
     padding: 20px 32px;
     padding-bottom: 48px;
     overflow-y: auto;
-    background: gray;
+    max-height: 400px
 `
 
 // TodoList 컴포넌트 속성 정의

@@ -1,6 +1,6 @@
 import './App.css';
 import Todos from './components/Todos';
-import TodosContainer from './containers/TodosContainer';
+import TodosContainer from './components/TodoTemplate';
 import { createGlobalStyle } from "styled-components";
 
   // 상위 컴포넌트의 상태 데이터를 컴포넌트 속성(props)을 통해 하위 컴포넌트에 전달
@@ -22,17 +22,6 @@ const App = () => {
 
   return (
     <>
-    {
-    /*
-    TDD
-    <h1>To-do</h1> 
-    <ul>
-      <li>
-        아무 일도 하기 싫다
-      </li>
-    </ul> */
-    }
-    {/* <Todos /> */}
     <GlobalStyle />
     <TodosContainer />
     </>

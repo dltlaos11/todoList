@@ -83,6 +83,12 @@ const Text = styled.div<TextProps>`
     `}
 `;
 
+const TextInput = styled.input`
+  flex: 1;
+  font-size: 21px;
+  color: #495057;
+`;
+
 
 
 const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
@@ -175,28 +181,32 @@ const Todoitem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
     }, [editInput])
 
   return (
+
     <div className={styles.item}>
         {/* <input type='checkbox' checked={done} onChange={() => onToggle(id)}/> */}
-        <CheckCircle done={done} onClick={() => onToggle(id)}>
-            { done && <MdDone />}
-        </CheckCircle>
-        {/* 편집 상태일 떄 ref 사용한 입력 요소 표시 */}
-        {showInput && (
-            <input 
-                value={inputText}
-                onChange={onChange}
-                onKeyPress={handleKeyPress}
-                onBlur={handleBlur}
-                ref={editInput}
-            />
-        )}
-        {/* 편집 상태가 아닐 떄 span 요소 표시 */}
-        {!showInput && <Text done={done} onDoubleClick={onDoubleClick}>{text}</Text>}
-        {/* 
-        Todo 항목 텍스트 표시 
-        <span>{todo.text}</span>
-        */}
-        <button onClick={() => onRemove(id)}>삭제</button>
+        <TodoItemBlock>
+            <CheckCircle done={done} onClick={() => onToggle(id)}>
+                { done && <MdDone />}
+            </CheckCircle>
+            {/* 편집 상태일 떄 ref 사용한 입력 요소 표시 */}
+            {showInput && (
+                <TextInput 
+                    value={inputText}
+                    onChange={onChange}
+                    onKeyPress={handleKeyPress}
+                    onBlur={handleBlur}
+                    ref={editInput}
+                />
+            )}
+            {/* 편집 상태가 아닐 떄 span 요소 표시 */}
+            {!showInput && <Text done={done} onDoubleClick={onDoubleClick}>{text}</Text>}
+
+            <Remove onClick={()=>onRemove(id)}>
+                <MdDelete />
+            </Remove>
+            {/* <button onClick={() => onRemove(id)}>삭제</button> */}
+        </TodoItemBlock>
+
     </div>
   )
 }
